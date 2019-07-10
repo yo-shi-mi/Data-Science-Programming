@@ -5,7 +5,9 @@ Course:cs-x-programming
 Student:Erin
 
 ID:
+
 Department:NTUE NSE
+
 Introduction:Guten Tag!
 
 ## Woche ein
