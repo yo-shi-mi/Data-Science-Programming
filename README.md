@@ -13,6 +13,8 @@ Introduction:Guten Tag!
 ## Woche ein
 * Github account
 * README.md
+* Install Git
+* Install R.Rstudio
 
 ## Link example
 [Coding](https://github.com/yo-shi-mi/hw)
