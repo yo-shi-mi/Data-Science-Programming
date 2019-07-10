@@ -1,10 +1,18 @@
-# hw Site
+# 2019 Summer School
 
-just a sample
-* cool
+Course:cs-x-programming
+Student:Erin
+ID:
+Department:NTUE NSE
+Introduction:Guten Tag!
+
+## Woche ein
+* Github account
+* README.md
+
 ## Link example
 [Coding](https://github.com/yo-shi-mi/hw)
-1. e
-2. er
-3. eri
-4. erin
+1. eins
+2. zwei
+3. drei
+4. vier
