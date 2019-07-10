@@ -1,7 +1,9 @@
 # 2019 Summer School
 
 Course:cs-x-programming
+
 Student:Erin
+
 ID:
 Department:NTUE NSE
 Introduction:Guten Tag!
