@@ -18,8 +18,8 @@ Introduction:Guten Tag!
 * Build Rmarkdown
 
 ## Week one-2
-* [Web crawler practice](https://github.com/yo-shi-mi/hw/blob/master/week%201.2/Weather%20in%20Europe.R)
-* [Data merge](https://github.com/yo-shi-mi/hw/blob/master/week%201.2/Practice%201.R)
+* [Web crawler](https://github.com/yo-shi-mi/hw/blob/master/week%201.2/Weather%20in%20Europe.R)
+* [Data merge(just for  practice)](https://github.com/yo-shi-mi/hw/blob/master/week%201.2/Practice%201.R)
 
 ## Link example
 [Coding](https://github.com/yo-shi-mi/hw)
