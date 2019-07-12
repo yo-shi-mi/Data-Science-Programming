@@ -4,17 +4,22 @@ Course:cs-x-programming
 
 Student:Erin
 
-ID:
+ID:110712019(?
 
 Department:NTUE NSE
 
 Introduction:Guten Tag!
 
-## Woche ein
+## Week one-1
 * Github account
 * README.md
 * Install Git
 * Install R.Rstudio
+* Build Rmarkdown
+
+## Week one-2
+* [Web crawler practice]()
+* [Data merge]()
 
 ## Link example
 [Coding](https://github.com/yo-shi-mi/hw)
