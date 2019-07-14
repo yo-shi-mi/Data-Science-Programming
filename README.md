@@ -18,12 +18,5 @@ Introduction:Guten Tag!
 * [Build Rmarkdown](https://github.com/yo-shi-mi/hw/blob/master/week%201.1/my_first_r_markdown.html)
 
 ## Week one-2
-* [Web crawler](https://github.com/yo-shi-mi/hw/blob/master/week%201.2/Weather%20in%20Europe.R)
-* [Data merge(just for  practice)](https://github.com/yo-shi-mi/hw/blob/master/week%201.2/Practice%201.R)
-
-## Link example
-[Coding](https://github.com/yo-shi-mi/hw)
-1. eins
-2. zwei
-3. drei
-4. vier
+* [HW1(with web crawler)](https://github.com/yo-shi-mi/hw/blob/master/week%201.2/Weather%20in%20Europe.R)
+* [Data merge(just for testing)](https://github.com/yo-shi-mi/hw/blob/master/week%201.2/Practice%201.R)
