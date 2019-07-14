@@ -5,6 +5,7 @@ date: "2019/7/14"
 output: html_document
 ---
 ```{r}
+library(rvest)
 doc <- read_html("https://www.accuweather.com/en/de/berlin/10178/month/178087?monyr=6/01/2019")
 doc %>% html_nodes(".actual .large-temp")
 doc %>% html_nodes(".actual .large-temp") %>% html_text()

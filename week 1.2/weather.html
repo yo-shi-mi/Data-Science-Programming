@@ -376,14 +376,636 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Weather</h1>
 <h4 class="author">Erin</h4>
-<h4 class="date">2019/7/11</h4>
+<h4 class="date">2019/7/14</h4>
 
 </div>
 
 
-<div id="weather-in-austria" class="section level2">
-<h2>Weather in Austria</h2>
-</div>
+<pre class="r"><code>library(rvest)</code></pre>
+<pre><code>## Loading required package: xml2</code></pre>
+<pre class="r"><code>doc &lt;- read_html(&quot;https://www.accuweather.com/en/de/berlin/10178/month/178087?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;span class=&quot;large-temp&quot;&gt;22°&lt;/span&gt;
+##  [2] &lt;span class=&quot;large-temp&quot;&gt;22°&lt;/span&gt;
+##  [3] &lt;span class=&quot;large-temp&quot;&gt;20°&lt;/span&gt;
+##  [4] &lt;span class=&quot;large-temp&quot;&gt;18°&lt;/span&gt;
+##  [5] &lt;span class=&quot;large-temp&quot;&gt;24°&lt;/span&gt;
+##  [6] &lt;span class=&quot;large-temp&quot;&gt;25°&lt;/span&gt;
+##  [7] &lt;span class=&quot;large-temp&quot;&gt;28°&lt;/span&gt;
+##  [8] &lt;span class=&quot;large-temp&quot;&gt;32°&lt;/span&gt;
+##  [9] &lt;span class=&quot;large-temp&quot;&gt;34°&lt;/span&gt;
+## [10] &lt;span class=&quot;large-temp&quot;&gt;31°&lt;/span&gt;
+## [11] &lt;span class=&quot;large-temp&quot;&gt;34°&lt;/span&gt;
+## [12] &lt;span class=&quot;large-temp&quot;&gt;32°&lt;/span&gt;
+## [13] &lt;span class=&quot;large-temp&quot;&gt;25°&lt;/span&gt;
+## [14] &lt;span class=&quot;large-temp&quot;&gt;23°&lt;/span&gt;
+## [15] &lt;span class=&quot;large-temp&quot;&gt;26°&lt;/span&gt;
+## [16] &lt;span class=&quot;large-temp&quot;&gt;27°&lt;/span&gt;
+## [17] &lt;span class=&quot;large-temp&quot;&gt;29°&lt;/span&gt;
+## [18] &lt;span class=&quot;large-temp&quot;&gt;33°&lt;/span&gt;
+## [19] &lt;span class=&quot;large-temp&quot;&gt;25°&lt;/span&gt;
+## [20] &lt;span class=&quot;large-temp&quot;&gt;30°&lt;/span&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;22°&quot; &quot;22°&quot; &quot;20°&quot; &quot;18°&quot; &quot;24°&quot; &quot;25°&quot; &quot;28°&quot; &quot;32°&quot; &quot;34°&quot; &quot;31°&quot; &quot;34°&quot;
+## [12] &quot;32°&quot; &quot;25°&quot; &quot;23°&quot; &quot;26°&quot; &quot;27°&quot; &quot;29°&quot; &quot;33°&quot; &quot;25°&quot; &quot;30°&quot; &quot;32°&quot; &quot;23°&quot;
+## [23] &quot;27°&quot; &quot;29°&quot; &quot;32°&quot; &quot;26°&quot; &quot;25°&quot; &quot;26°&quot; &quot;28°&quot; &quot;30°&quot; &quot;34°&quot; &quot;38°&quot; &quot;32°&quot;
+## [34] &quot;24°&quot; &quot;32°&quot; &quot;39°&quot; &quot;29°&quot; &quot;22°&quot; &quot;21°&quot; &quot;23°&quot; &quot;21°&quot; &quot;24°&quot;</code></pre>
+<pre class="r"><code>h.t.Berlin&lt;- doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;) %&gt;% html_text()
+
+
+doc &lt;- read_html(&quot;https://www.accuweather.com/en/de/berlin/10178/month/178087?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.small-temp&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;span class=&quot;small-temp&quot;&gt;/9°&lt;/span&gt;
+##  [2] &lt;span class=&quot;small-temp&quot;&gt;/16°&lt;/span&gt;
+##  [3] &lt;span class=&quot;small-temp&quot;&gt;/9°&lt;/span&gt;
+##  [4] &lt;span class=&quot;small-temp&quot;&gt;/9°&lt;/span&gt;
+##  [5] &lt;span class=&quot;small-temp&quot;&gt;/7°&lt;/span&gt;
+##  [6] &lt;span class=&quot;small-temp&quot;&gt;/14°&lt;/span&gt;
+##  [7] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+##  [8] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+##  [9] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+## [10] &lt;span class=&quot;small-temp&quot;&gt;/18°&lt;/span&gt;
+## [11] &lt;span class=&quot;small-temp&quot;&gt;/17°&lt;/span&gt;
+## [12] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+## [13] &lt;span class=&quot;small-temp&quot;&gt;/14°&lt;/span&gt;
+## [14] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+## [15] &lt;span class=&quot;small-temp&quot;&gt;/12°&lt;/span&gt;
+## [16] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+## [17] &lt;span class=&quot;small-temp&quot;&gt;/18°&lt;/span&gt;
+## [18] &lt;span class=&quot;small-temp&quot;&gt;/17°&lt;/span&gt;
+## [19] &lt;span class=&quot;small-temp&quot;&gt;/16°&lt;/span&gt;
+## [20] &lt;span class=&quot;small-temp&quot;&gt;/14°&lt;/span&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.small-temp&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;/9°&quot;  &quot;/16°&quot; &quot;/9°&quot;  &quot;/9°&quot;  &quot;/7°&quot;  &quot;/14°&quot; &quot;/15°&quot; &quot;/15°&quot; &quot;/19°&quot; &quot;/18°&quot;
+## [11] &quot;/17°&quot; &quot;/15°&quot; &quot;/14°&quot; &quot;/15°&quot; &quot;/12°&quot; &quot;/15°&quot; &quot;/18°&quot; &quot;/17°&quot; &quot;/16°&quot; &quot;/14°&quot;
+## [21] &quot;/18°&quot; &quot;/15°&quot; &quot;/16°&quot; &quot;/16°&quot; &quot;/17°&quot; &quot;/18°&quot; &quot;/17°&quot; &quot;/14°&quot; &quot;/14°&quot; &quot;/15°&quot;
+## [31] &quot;/19°&quot; &quot;/20°&quot; &quot;/15°&quot; &quot;/13°&quot; &quot;/14°&quot; &quot;/16°&quot; &quot;/17°&quot; &quot;/14°&quot; &quot;/11°&quot; &quot;/11°&quot;
+## [41] &quot;/16°&quot; &quot;/14°&quot;</code></pre>
+<pre class="r"><code>l.t.Berlin&lt;- doc %&gt;% html_nodes(&quot;.small-temp&quot;) %&gt;% html_text()
+l.t.Berlin&lt;- substr(l.t.Berlin,2,4)
+
+
+doc &lt;- read_html(&quot;https://www.accuweather.com/en/de/berlin/10178/month/178087?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.date&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;h3 class=&quot;date&quot;&gt;Sun 5/26&lt;/h3&gt;
+##  [2] &lt;h3 class=&quot;date&quot;&gt;Mon 5/27&lt;/h3&gt;
+##  [3] &lt;h3 class=&quot;date&quot;&gt;Tue 5/28&lt;/h3&gt;
+##  [4] &lt;h3 class=&quot;date&quot;&gt;Wed 5/29&lt;/h3&gt;
+##  [5] &lt;h3 class=&quot;date&quot;&gt;Thu 5/30&lt;/h3&gt;
+##  [6] &lt;h3 class=&quot;date&quot;&gt;Fri 5/31&lt;/h3&gt;
+##  [7] &lt;h3 class=&quot;date&quot;&gt;Sat 6/1&lt;/h3&gt;
+##  [8] &lt;h3 class=&quot;date&quot;&gt;Sun 6/2&lt;/h3&gt;
+##  [9] &lt;h3 class=&quot;date&quot;&gt;Mon 6/3&lt;/h3&gt;
+## [10] &lt;h3 class=&quot;date&quot;&gt;Tue 6/4&lt;/h3&gt;
+## [11] &lt;h3 class=&quot;date&quot;&gt;Wed 6/5&lt;/h3&gt;
+## [12] &lt;h3 class=&quot;date&quot;&gt;Thu 6/6&lt;/h3&gt;
+## [13] &lt;h3 class=&quot;date&quot;&gt;Fri 6/7&lt;/h3&gt;
+## [14] &lt;h3 class=&quot;date&quot;&gt;Sat 6/8&lt;/h3&gt;
+## [15] &lt;h3 class=&quot;date&quot;&gt;Sun 6/9&lt;/h3&gt;
+## [16] &lt;h3 class=&quot;date&quot;&gt;Mon 6/10&lt;/h3&gt;
+## [17] &lt;h3 class=&quot;date&quot;&gt;Tue 6/11&lt;/h3&gt;
+## [18] &lt;h3 class=&quot;date&quot;&gt;Wed 6/12&lt;/h3&gt;
+## [19] &lt;h3 class=&quot;date&quot;&gt;Thu 6/13&lt;/h3&gt;
+## [20] &lt;h3 class=&quot;date&quot;&gt;Fri 6/14&lt;/h3&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.date&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;Sun 5/26&quot; &quot;Mon 5/27&quot; &quot;Tue 5/28&quot; &quot;Wed 5/29&quot; &quot;Thu 5/30&quot; &quot;Fri 5/31&quot;
+##  [7] &quot;Sat 6/1&quot;  &quot;Sun 6/2&quot;  &quot;Mon 6/3&quot;  &quot;Tue 6/4&quot;  &quot;Wed 6/5&quot;  &quot;Thu 6/6&quot; 
+## [13] &quot;Fri 6/7&quot;  &quot;Sat 6/8&quot;  &quot;Sun 6/9&quot;  &quot;Mon 6/10&quot; &quot;Tue 6/11&quot; &quot;Wed 6/12&quot;
+## [19] &quot;Thu 6/13&quot; &quot;Fri 6/14&quot; &quot;Sat 6/15&quot; &quot;Sun 6/16&quot; &quot;Mon 6/17&quot; &quot;Tue 6/18&quot;
+## [25] &quot;Wed 6/19&quot; &quot;Thu 6/20&quot; &quot;Fri 6/21&quot; &quot;Sat 6/22&quot; &quot;Sun 6/23&quot; &quot;Mon 6/24&quot;
+## [31] &quot;Tue 6/25&quot; &quot;Wed 6/26&quot; &quot;Thu 6/27&quot; &quot;Fri 6/28&quot; &quot;Sat 6/29&quot; &quot;Sun 6/30&quot;
+## [37] &quot;Mon 7/1&quot;  &quot;Tue 7/2&quot;  &quot;Wed 7/3&quot;  &quot;Thu 7/4&quot;  &quot;Fri 7/5&quot;  &quot;Sat 7/6&quot;</code></pre>
+<pre class="r"><code>date&lt;- doc %&gt;% html_nodes(&quot;.date&quot;) %&gt;% html_text()
+date&lt;- substr(date,4,8) 
+date[7]&lt;- &quot; 6/01&quot;
+date[8]&lt;- &quot; 6/02&quot;
+date[9]&lt;- &quot; 6/03&quot;
+date[10]&lt;- &quot; 6/04&quot;
+date[11]&lt;- &quot; 6/05&quot;
+date[12]&lt;- &quot; 6/06&quot;
+date[13]&lt;- &quot; 6/07&quot;
+date[14]&lt;- &quot; 6/08&quot;
+date[15]&lt;- &quot; 6/09&quot;
+
+d = cbind(date,h.t.Berlin,l.t.Berlin)
+
+doc &lt;- read_html(&quot;https://www.accuweather.com/en/ca/ottawa/k1p/month/55487?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.date&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;h3 class=&quot;date&quot;&gt;Sun 5/26&lt;/h3&gt;
+##  [2] &lt;h3 class=&quot;date&quot;&gt;Mon 5/27&lt;/h3&gt;
+##  [3] &lt;h3 class=&quot;date&quot;&gt;Tue 5/28&lt;/h3&gt;
+##  [4] &lt;h3 class=&quot;date&quot;&gt;Wed 5/29&lt;/h3&gt;
+##  [5] &lt;h3 class=&quot;date&quot;&gt;Thu 5/30&lt;/h3&gt;
+##  [6] &lt;h3 class=&quot;date&quot;&gt;Fri 5/31&lt;/h3&gt;
+##  [7] &lt;h3 class=&quot;date&quot;&gt;Sat 6/1&lt;/h3&gt;
+##  [8] &lt;h3 class=&quot;date&quot;&gt;Sun 6/2&lt;/h3&gt;
+##  [9] &lt;h3 class=&quot;date&quot;&gt;Mon 6/3&lt;/h3&gt;
+## [10] &lt;h3 class=&quot;date&quot;&gt;Tue 6/4&lt;/h3&gt;
+## [11] &lt;h3 class=&quot;date&quot;&gt;Wed 6/5&lt;/h3&gt;
+## [12] &lt;h3 class=&quot;date&quot;&gt;Thu 6/6&lt;/h3&gt;
+## [13] &lt;h3 class=&quot;date&quot;&gt;Fri 6/7&lt;/h3&gt;
+## [14] &lt;h3 class=&quot;date&quot;&gt;Sat 6/8&lt;/h3&gt;
+## [15] &lt;h3 class=&quot;date&quot;&gt;Sun 6/9&lt;/h3&gt;
+## [16] &lt;h3 class=&quot;date&quot;&gt;Mon 6/10&lt;/h3&gt;
+## [17] &lt;h3 class=&quot;date&quot;&gt;Tue 6/11&lt;/h3&gt;
+## [18] &lt;h3 class=&quot;date&quot;&gt;Wed 6/12&lt;/h3&gt;
+## [19] &lt;h3 class=&quot;date&quot;&gt;Thu 6/13&lt;/h3&gt;
+## [20] &lt;h3 class=&quot;date&quot;&gt;Fri 6/14&lt;/h3&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.date&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;Sun 5/26&quot; &quot;Mon 5/27&quot; &quot;Tue 5/28&quot; &quot;Wed 5/29&quot; &quot;Thu 5/30&quot; &quot;Fri 5/31&quot;
+##  [7] &quot;Sat 6/1&quot;  &quot;Sun 6/2&quot;  &quot;Mon 6/3&quot;  &quot;Tue 6/4&quot;  &quot;Wed 6/5&quot;  &quot;Thu 6/6&quot; 
+## [13] &quot;Fri 6/7&quot;  &quot;Sat 6/8&quot;  &quot;Sun 6/9&quot;  &quot;Mon 6/10&quot; &quot;Tue 6/11&quot; &quot;Wed 6/12&quot;
+## [19] &quot;Thu 6/13&quot; &quot;Fri 6/14&quot; &quot;Sat 6/15&quot; &quot;Sun 6/16&quot; &quot;Mon 6/17&quot; &quot;Tue 6/18&quot;
+## [25] &quot;Wed 6/19&quot; &quot;Thu 6/20&quot; &quot;Fri 6/21&quot; &quot;Sat 6/22&quot; &quot;Sun 6/23&quot; &quot;Mon 6/24&quot;
+## [31] &quot;Tue 6/25&quot; &quot;Wed 6/26&quot; &quot;Thu 6/27&quot; &quot;Fri 6/28&quot; &quot;Sat 6/29&quot; &quot;Sun 6/30&quot;
+## [37] &quot;Mon 7/1&quot;  &quot;Tue 7/2&quot;  &quot;Wed 7/3&quot;  &quot;Thu 7/4&quot;  &quot;Fri 7/5&quot;  &quot;Sat 7/6&quot;</code></pre>
+<pre class="r"><code>date&lt;- doc %&gt;% html_nodes(&quot;.date&quot;) %&gt;% html_text()
+date&lt;- substr(date,4,8)
+date[7]&lt;- &quot; 6/01&quot;
+date[8]&lt;- &quot; 6/02&quot;
+date[9]&lt;- &quot; 6/03&quot;
+date[10]&lt;- &quot; 6/04&quot;
+date[11]&lt;- &quot; 6/05&quot;
+date[12]&lt;- &quot; 6/06&quot;
+date[13]&lt;- &quot; 6/07&quot;
+date[14]&lt;- &quot; 6/08&quot;
+date[15]&lt;- &quot; 6/09&quot;
+
+doc &lt;- read_html(&quot;https://www.accuweather.com/en/ca/ottawa/k1p/month/55487?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;span class=&quot;large-temp&quot;&gt;23°&lt;/span&gt;
+##  [2] &lt;span class=&quot;large-temp&quot;&gt;17°&lt;/span&gt;
+##  [3] &lt;span class=&quot;large-temp&quot;&gt;13°&lt;/span&gt;
+##  [4] &lt;span class=&quot;large-temp&quot;&gt;19°&lt;/span&gt;
+##  [5] &lt;span class=&quot;large-temp&quot;&gt;22°&lt;/span&gt;
+##  [6] &lt;span class=&quot;large-temp&quot;&gt;15°&lt;/span&gt;
+##  [7] &lt;span class=&quot;large-temp&quot;&gt;18°&lt;/span&gt;
+##  [8] &lt;span class=&quot;large-temp&quot;&gt;21°&lt;/span&gt;
+##  [9] &lt;span class=&quot;large-temp&quot;&gt;15°&lt;/span&gt;
+## [10] &lt;span class=&quot;large-temp&quot;&gt;19°&lt;/span&gt;
+## [11] &lt;span class=&quot;large-temp&quot;&gt;16°&lt;/span&gt;
+## [12] &lt;span class=&quot;large-temp&quot;&gt;23°&lt;/span&gt;
+## [13] &lt;span class=&quot;large-temp&quot;&gt;26°&lt;/span&gt;
+## [14] &lt;span class=&quot;large-temp&quot;&gt;26°&lt;/span&gt;
+## [15] &lt;span class=&quot;large-temp&quot;&gt;30°&lt;/span&gt;
+## [16] &lt;span class=&quot;large-temp&quot;&gt;29°&lt;/span&gt;
+## [17] &lt;span class=&quot;large-temp&quot;&gt;21°&lt;/span&gt;
+## [18] &lt;span class=&quot;large-temp&quot;&gt;24°&lt;/span&gt;
+## [19] &lt;span class=&quot;large-temp&quot;&gt;20°&lt;/span&gt;
+## [20] &lt;span class=&quot;large-temp&quot;&gt;19°&lt;/span&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;23°&quot; &quot;17°&quot; &quot;13°&quot; &quot;19°&quot; &quot;22°&quot; &quot;15°&quot; &quot;18°&quot; &quot;21°&quot; &quot;15°&quot; &quot;19°&quot; &quot;16°&quot;
+## [12] &quot;23°&quot; &quot;26°&quot; &quot;26°&quot; &quot;30°&quot; &quot;29°&quot; &quot;21°&quot; &quot;24°&quot; &quot;20°&quot; &quot;19°&quot; &quot;19°&quot; &quot;21°&quot;
+## [23] &quot;23°&quot; &quot;26°&quot; &quot;27°&quot; &quot;19°&quot; &quot;24°&quot; &quot;26°&quot; &quot;28°&quot; &quot;28°&quot; &quot;29°&quot; &quot;28°&quot; &quot;30°&quot;
+## [34] &quot;28°&quot; &quot;28°&quot; &quot;24°&quot; &quot;28°&quot; &quot;30°&quot; &quot;31°&quot; &quot;32°&quot; &quot;32°&quot; &quot;30°&quot;</code></pre>
+<pre class="r"><code>h.t.Ottawa&lt;- doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;) %&gt;% html_text()
+
+doc &lt;- read_html(&quot;https://www.accuweather.com/en/ca/ottawa/k1p/month/55487?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.small-temp&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;span class=&quot;small-temp&quot;&gt;/10°&lt;/span&gt;
+##  [2] &lt;span class=&quot;small-temp&quot;&gt;/8°&lt;/span&gt;
+##  [3] &lt;span class=&quot;small-temp&quot;&gt;/8°&lt;/span&gt;
+##  [4] &lt;span class=&quot;small-temp&quot;&gt;/7°&lt;/span&gt;
+##  [5] &lt;span class=&quot;small-temp&quot;&gt;/8°&lt;/span&gt;
+##  [6] &lt;span class=&quot;small-temp&quot;&gt;/6°&lt;/span&gt;
+##  [7] &lt;span class=&quot;small-temp&quot;&gt;/9°&lt;/span&gt;
+##  [8] &lt;span class=&quot;small-temp&quot;&gt;/8°&lt;/span&gt;
+##  [9] &lt;span class=&quot;small-temp&quot;&gt;/5°&lt;/span&gt;
+## [10] &lt;span class=&quot;small-temp&quot;&gt;/2°&lt;/span&gt;
+## [11] &lt;span class=&quot;small-temp&quot;&gt;/10°&lt;/span&gt;
+## [12] &lt;span class=&quot;small-temp&quot;&gt;/8°&lt;/span&gt;
+## [13] &lt;span class=&quot;small-temp&quot;&gt;/7°&lt;/span&gt;
+## [14] &lt;span class=&quot;small-temp&quot;&gt;/9°&lt;/span&gt;
+## [15] &lt;span class=&quot;small-temp&quot;&gt;/9°&lt;/span&gt;
+## [16] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+## [17] &lt;span class=&quot;small-temp&quot;&gt;/9°&lt;/span&gt;
+## [18] &lt;span class=&quot;small-temp&quot;&gt;/6°&lt;/span&gt;
+## [19] &lt;span class=&quot;small-temp&quot;&gt;/12°&lt;/span&gt;
+## [20] &lt;span class=&quot;small-temp&quot;&gt;/12°&lt;/span&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.small-temp&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;/10°&quot; &quot;/8°&quot;  &quot;/8°&quot;  &quot;/7°&quot;  &quot;/8°&quot;  &quot;/6°&quot;  &quot;/9°&quot;  &quot;/8°&quot;  &quot;/5°&quot;  &quot;/2°&quot; 
+## [11] &quot;/10°&quot; &quot;/8°&quot;  &quot;/7°&quot;  &quot;/9°&quot;  &quot;/9°&quot;  &quot;/15°&quot; &quot;/9°&quot;  &quot;/6°&quot;  &quot;/12°&quot; &quot;/12°&quot;
+## [21] &quot;/10°&quot; &quot;/7°&quot;  &quot;/7°&quot;  &quot;/11°&quot; &quot;/17°&quot; &quot;/15°&quot; &quot;/14°&quot; &quot;/13°&quot; &quot;/12°&quot; &quot;/12°&quot;
+## [31] &quot;/14°&quot; &quot;/14°&quot; &quot;/15°&quot; &quot;/15°&quot; &quot;/16°&quot; &quot;/14°&quot; &quot;/12°&quot; &quot;/18°&quot; &quot;/16°&quot; &quot;/16°&quot;
+## [41] &quot;/20°&quot; &quot;/17°&quot;</code></pre>
+<pre class="r"><code>l.t.Ottawa&lt;- doc %&gt;% html_nodes(&quot;.small-temp&quot;) %&gt;% html_text()
+l.t.Ottawa&lt;- substr(l.t.Ottawa,2,4)
+
+c = cbind(date,h.t.Ottawa,l.t.Ottawa)
+
+doc &lt;- read_html(&quot;https://www.accuweather.com/en/tw/taipei/226396/month/226396?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.date&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;h3 class=&quot;date&quot;&gt;Sun 5/26&lt;/h3&gt;
+##  [2] &lt;h3 class=&quot;date&quot;&gt;Mon 5/27&lt;/h3&gt;
+##  [3] &lt;h3 class=&quot;date&quot;&gt;Tue 5/28&lt;/h3&gt;
+##  [4] &lt;h3 class=&quot;date&quot;&gt;Wed 5/29&lt;/h3&gt;
+##  [5] &lt;h3 class=&quot;date&quot;&gt;Thu 5/30&lt;/h3&gt;
+##  [6] &lt;h3 class=&quot;date&quot;&gt;Fri 5/31&lt;/h3&gt;
+##  [7] &lt;h3 class=&quot;date&quot;&gt;Sat 6/1&lt;/h3&gt;
+##  [8] &lt;h3 class=&quot;date&quot;&gt;Sun 6/2&lt;/h3&gt;
+##  [9] &lt;h3 class=&quot;date&quot;&gt;Mon 6/3&lt;/h3&gt;
+## [10] &lt;h3 class=&quot;date&quot;&gt;Tue 6/4&lt;/h3&gt;
+## [11] &lt;h3 class=&quot;date&quot;&gt;Wed 6/5&lt;/h3&gt;
+## [12] &lt;h3 class=&quot;date&quot;&gt;Thu 6/6&lt;/h3&gt;
+## [13] &lt;h3 class=&quot;date&quot;&gt;Fri 6/7&lt;/h3&gt;
+## [14] &lt;h3 class=&quot;date&quot;&gt;Sat 6/8&lt;/h3&gt;
+## [15] &lt;h3 class=&quot;date&quot;&gt;Sun 6/9&lt;/h3&gt;
+## [16] &lt;h3 class=&quot;date&quot;&gt;Mon 6/10&lt;/h3&gt;
+## [17] &lt;h3 class=&quot;date&quot;&gt;Tue 6/11&lt;/h3&gt;
+## [18] &lt;h3 class=&quot;date&quot;&gt;Wed 6/12&lt;/h3&gt;
+## [19] &lt;h3 class=&quot;date&quot;&gt;Thu 6/13&lt;/h3&gt;
+## [20] &lt;h3 class=&quot;date&quot;&gt;Fri 6/14&lt;/h3&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.date&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;Sun 5/26&quot; &quot;Mon 5/27&quot; &quot;Tue 5/28&quot; &quot;Wed 5/29&quot; &quot;Thu 5/30&quot; &quot;Fri 5/31&quot;
+##  [7] &quot;Sat 6/1&quot;  &quot;Sun 6/2&quot;  &quot;Mon 6/3&quot;  &quot;Tue 6/4&quot;  &quot;Wed 6/5&quot;  &quot;Thu 6/6&quot; 
+## [13] &quot;Fri 6/7&quot;  &quot;Sat 6/8&quot;  &quot;Sun 6/9&quot;  &quot;Mon 6/10&quot; &quot;Tue 6/11&quot; &quot;Wed 6/12&quot;
+## [19] &quot;Thu 6/13&quot; &quot;Fri 6/14&quot; &quot;Sat 6/15&quot; &quot;Sun 6/16&quot; &quot;Mon 6/17&quot; &quot;Tue 6/18&quot;
+## [25] &quot;Wed 6/19&quot; &quot;Thu 6/20&quot; &quot;Fri 6/21&quot; &quot;Sat 6/22&quot; &quot;Sun 6/23&quot; &quot;Mon 6/24&quot;
+## [31] &quot;Tue 6/25&quot; &quot;Wed 6/26&quot; &quot;Thu 6/27&quot; &quot;Fri 6/28&quot; &quot;Sat 6/29&quot; &quot;Sun 6/30&quot;
+## [37] &quot;Mon 7/1&quot;  &quot;Tue 7/2&quot;  &quot;Wed 7/3&quot;  &quot;Thu 7/4&quot;  &quot;Fri 7/5&quot;  &quot;Sat 7/6&quot;</code></pre>
+<pre class="r"><code>date&lt;- doc %&gt;% html_nodes(&quot;.date&quot;) %&gt;% html_text()
+date&lt;- substr(date,4,8)
+date[7]&lt;- &quot; 6/01&quot;
+date[8]&lt;- &quot; 6/02&quot;
+date[9]&lt;- &quot; 6/03&quot;
+date[10]&lt;- &quot; 6/04&quot;
+date[11]&lt;- &quot; 6/05&quot;
+date[12]&lt;- &quot; 6/06&quot;
+date[13]&lt;- &quot; 6/07&quot;
+date[14]&lt;- &quot; 6/08&quot;
+date[15]&lt;- &quot; 6/09&quot;
+
+doc &lt;- read_html(&quot;https://www.accuweather.com/en/tw/taipei/226396/month/226396?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;span class=&quot;large-temp&quot;&gt;33°&lt;/span&gt;
+##  [2] &lt;span class=&quot;large-temp&quot;&gt;32°&lt;/span&gt;
+##  [3] &lt;span class=&quot;large-temp&quot;&gt;28°&lt;/span&gt;
+##  [4] &lt;span class=&quot;large-temp&quot;&gt;25°&lt;/span&gt;
+##  [5] &lt;span class=&quot;large-temp&quot;&gt;26°&lt;/span&gt;
+##  [6] &lt;span class=&quot;large-temp&quot;&gt;24°&lt;/span&gt;
+##  [7] &lt;span class=&quot;large-temp&quot;&gt;26°&lt;/span&gt;
+##  [8] &lt;span class=&quot;large-temp&quot;&gt;25°&lt;/span&gt;
+##  [9] &lt;span class=&quot;large-temp&quot;&gt;27°&lt;/span&gt;
+## [10] &lt;span class=&quot;large-temp&quot;&gt;28°&lt;/span&gt;
+## [11] &lt;span class=&quot;large-temp&quot;&gt;26°&lt;/span&gt;
+## [12] &lt;span class=&quot;large-temp&quot;&gt;32°&lt;/span&gt;
+## [13] &lt;span class=&quot;large-temp&quot;&gt;25°&lt;/span&gt;
+## [14] &lt;span class=&quot;large-temp&quot;&gt;25°&lt;/span&gt;
+## [15] &lt;span class=&quot;large-temp&quot;&gt;21°&lt;/span&gt;
+## [16] &lt;span class=&quot;large-temp&quot;&gt;17°&lt;/span&gt;
+## [17] &lt;span class=&quot;large-temp&quot;&gt;24°&lt;/span&gt;
+## [18] &lt;span class=&quot;large-temp&quot;&gt;22°&lt;/span&gt;
+## [19] &lt;span class=&quot;large-temp&quot;&gt;26°&lt;/span&gt;
+## [20] &lt;span class=&quot;large-temp&quot;&gt;27°&lt;/span&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;33°&quot; &quot;32°&quot; &quot;28°&quot; &quot;25°&quot; &quot;26°&quot; &quot;24°&quot; &quot;26°&quot; &quot;25°&quot; &quot;27°&quot; &quot;28°&quot; &quot;26°&quot;
+## [12] &quot;32°&quot; &quot;25°&quot; &quot;25°&quot; &quot;21°&quot; &quot;17°&quot; &quot;24°&quot; &quot;22°&quot; &quot;26°&quot; &quot;27°&quot; &quot;21°&quot; &quot;31°&quot;
+## [23] &quot;29°&quot; &quot;28°&quot; &quot;29°&quot; &quot;29°&quot; &quot;30°&quot; &quot;25°&quot; &quot;24°&quot; &quot;21°&quot; &quot;27°&quot; &quot;29°&quot; &quot;29°&quot;
+## [34] &quot;31°&quot; &quot;22°&quot; &quot;24°&quot; &quot;24°&quot; &quot;28°&quot; &quot;29°&quot; &quot;25°&quot; &quot;25°&quot; &quot;24°&quot;</code></pre>
+<pre class="r"><code>h.t.Taipei&lt;- doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;) %&gt;% html_text()
+
+doc &lt;- read_html(&quot;https://www.accuweather.com/en/tw/taipei/226396/month/226396?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.small-temp&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+##  [2] &lt;span class=&quot;small-temp&quot;&gt;/20°&lt;/span&gt;
+##  [3] &lt;span class=&quot;small-temp&quot;&gt;/21°&lt;/span&gt;
+##  [4] &lt;span class=&quot;small-temp&quot;&gt;/18°&lt;/span&gt;
+##  [5] &lt;span class=&quot;small-temp&quot;&gt;/17°&lt;/span&gt;
+##  [6] &lt;span class=&quot;small-temp&quot;&gt;/20°&lt;/span&gt;
+##  [7] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+##  [8] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+##  [9] &lt;span class=&quot;small-temp&quot;&gt;/20°&lt;/span&gt;
+## [10] &lt;span class=&quot;small-temp&quot;&gt;/18°&lt;/span&gt;
+## [11] &lt;span class=&quot;small-temp&quot;&gt;/20°&lt;/span&gt;
+## [12] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+## [13] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+## [14] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+## [15] &lt;span class=&quot;small-temp&quot;&gt;/16°&lt;/span&gt;
+## [16] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+## [17] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+## [18] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+## [19] &lt;span class=&quot;small-temp&quot;&gt;/14°&lt;/span&gt;
+## [20] &lt;span class=&quot;small-temp&quot;&gt;/18°&lt;/span&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.small-temp&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;/19°&quot; &quot;/20°&quot; &quot;/21°&quot; &quot;/18°&quot; &quot;/17°&quot; &quot;/20°&quot; &quot;/19°&quot; &quot;/19°&quot; &quot;/20°&quot; &quot;/18°&quot;
+## [11] &quot;/20°&quot; &quot;/19°&quot; &quot;/19°&quot; &quot;/19°&quot; &quot;/16°&quot; &quot;/15°&quot; &quot;/15°&quot; &quot;/15°&quot; &quot;/14°&quot; &quot;/18°&quot;
+## [21] &quot;/16°&quot; &quot;/17°&quot; &quot;/17°&quot; &quot;/20°&quot; &quot;/19°&quot; &quot;/21°&quot; &quot;/22°&quot; &quot;/21°&quot; &quot;/20°&quot; &quot;/18°&quot;
+## [31] &quot;/17°&quot; &quot;/20°&quot; &quot;/23°&quot; &quot;/22°&quot; &quot;/19°&quot; &quot;/20°&quot; &quot;/21°&quot; &quot;/22°&quot; &quot;/22°&quot; &quot;/21°&quot;
+## [41] &quot;/19°&quot; &quot;/19°&quot;</code></pre>
+<pre class="r"><code>l.t.Taipei&lt;- doc %&gt;% html_nodes(&quot;.small-temp&quot;) %&gt;% html_text()
+l.t.Taipei&lt;- substr(l.t.Taipei,2,4)
+
+t = cbind(date,h.t.Taipei,l.t.Taipei)
+
+doc &lt;- read_html(&quot;https://www.accuweather.com/en/jp/tokyo/226396/month/226396?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.date&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;h3 class=&quot;date&quot;&gt;Sun 5/26&lt;/h3&gt;
+##  [2] &lt;h3 class=&quot;date&quot;&gt;Mon 5/27&lt;/h3&gt;
+##  [3] &lt;h3 class=&quot;date&quot;&gt;Tue 5/28&lt;/h3&gt;
+##  [4] &lt;h3 class=&quot;date&quot;&gt;Wed 5/29&lt;/h3&gt;
+##  [5] &lt;h3 class=&quot;date&quot;&gt;Thu 5/30&lt;/h3&gt;
+##  [6] &lt;h3 class=&quot;date&quot;&gt;Fri 5/31&lt;/h3&gt;
+##  [7] &lt;h3 class=&quot;date&quot;&gt;Sat 6/1&lt;/h3&gt;
+##  [8] &lt;h3 class=&quot;date&quot;&gt;Sun 6/2&lt;/h3&gt;
+##  [9] &lt;h3 class=&quot;date&quot;&gt;Mon 6/3&lt;/h3&gt;
+## [10] &lt;h3 class=&quot;date&quot;&gt;Tue 6/4&lt;/h3&gt;
+## [11] &lt;h3 class=&quot;date&quot;&gt;Wed 6/5&lt;/h3&gt;
+## [12] &lt;h3 class=&quot;date&quot;&gt;Thu 6/6&lt;/h3&gt;
+## [13] &lt;h3 class=&quot;date&quot;&gt;Fri 6/7&lt;/h3&gt;
+## [14] &lt;h3 class=&quot;date&quot;&gt;Sat 6/8&lt;/h3&gt;
+## [15] &lt;h3 class=&quot;date&quot;&gt;Sun 6/9&lt;/h3&gt;
+## [16] &lt;h3 class=&quot;date&quot;&gt;Mon 6/10&lt;/h3&gt;
+## [17] &lt;h3 class=&quot;date&quot;&gt;Tue 6/11&lt;/h3&gt;
+## [18] &lt;h3 class=&quot;date&quot;&gt;Wed 6/12&lt;/h3&gt;
+## [19] &lt;h3 class=&quot;date&quot;&gt;Thu 6/13&lt;/h3&gt;
+## [20] &lt;h3 class=&quot;date&quot;&gt;Fri 6/14&lt;/h3&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.date&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;Sun 5/26&quot; &quot;Mon 5/27&quot; &quot;Tue 5/28&quot; &quot;Wed 5/29&quot; &quot;Thu 5/30&quot; &quot;Fri 5/31&quot;
+##  [7] &quot;Sat 6/1&quot;  &quot;Sun 6/2&quot;  &quot;Mon 6/3&quot;  &quot;Tue 6/4&quot;  &quot;Wed 6/5&quot;  &quot;Thu 6/6&quot; 
+## [13] &quot;Fri 6/7&quot;  &quot;Sat 6/8&quot;  &quot;Sun 6/9&quot;  &quot;Mon 6/10&quot; &quot;Tue 6/11&quot; &quot;Wed 6/12&quot;
+## [19] &quot;Thu 6/13&quot; &quot;Fri 6/14&quot; &quot;Sat 6/15&quot; &quot;Sun 6/16&quot; &quot;Mon 6/17&quot; &quot;Tue 6/18&quot;
+## [25] &quot;Wed 6/19&quot; &quot;Thu 6/20&quot; &quot;Fri 6/21&quot; &quot;Sat 6/22&quot; &quot;Sun 6/23&quot; &quot;Mon 6/24&quot;
+## [31] &quot;Tue 6/25&quot; &quot;Wed 6/26&quot; &quot;Thu 6/27&quot; &quot;Fri 6/28&quot; &quot;Sat 6/29&quot; &quot;Sun 6/30&quot;
+## [37] &quot;Mon 7/1&quot;  &quot;Tue 7/2&quot;  &quot;Wed 7/3&quot;  &quot;Thu 7/4&quot;  &quot;Fri 7/5&quot;  &quot;Sat 7/6&quot;</code></pre>
+<pre class="r"><code>date&lt;- doc %&gt;% html_nodes(&quot;.date&quot;) %&gt;% html_text()
+date&lt;- substr(date,4,8)
+date[7]&lt;- &quot; 6/01&quot;
+date[8]&lt;- &quot; 6/02&quot;
+date[9]&lt;- &quot; 6/03&quot;
+date[10]&lt;- &quot; 6/04&quot;
+date[11]&lt;- &quot; 6/05&quot;
+date[12]&lt;- &quot; 6/06&quot;
+date[13]&lt;- &quot; 6/07&quot;
+date[14]&lt;- &quot; 6/08&quot;
+date[15]&lt;- &quot; 6/09&quot;
+
+doc &lt;- read_html(&quot;https://www.accuweather.com/en/jp/tokyo/226396/month/226396?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;span class=&quot;large-temp&quot;&gt;33°&lt;/span&gt;
+##  [2] &lt;span class=&quot;large-temp&quot;&gt;32°&lt;/span&gt;
+##  [3] &lt;span class=&quot;large-temp&quot;&gt;28°&lt;/span&gt;
+##  [4] &lt;span class=&quot;large-temp&quot;&gt;25°&lt;/span&gt;
+##  [5] &lt;span class=&quot;large-temp&quot;&gt;26°&lt;/span&gt;
+##  [6] &lt;span class=&quot;large-temp&quot;&gt;24°&lt;/span&gt;
+##  [7] &lt;span class=&quot;large-temp&quot;&gt;26°&lt;/span&gt;
+##  [8] &lt;span class=&quot;large-temp&quot;&gt;25°&lt;/span&gt;
+##  [9] &lt;span class=&quot;large-temp&quot;&gt;27°&lt;/span&gt;
+## [10] &lt;span class=&quot;large-temp&quot;&gt;28°&lt;/span&gt;
+## [11] &lt;span class=&quot;large-temp&quot;&gt;26°&lt;/span&gt;
+## [12] &lt;span class=&quot;large-temp&quot;&gt;32°&lt;/span&gt;
+## [13] &lt;span class=&quot;large-temp&quot;&gt;25°&lt;/span&gt;
+## [14] &lt;span class=&quot;large-temp&quot;&gt;25°&lt;/span&gt;
+## [15] &lt;span class=&quot;large-temp&quot;&gt;21°&lt;/span&gt;
+## [16] &lt;span class=&quot;large-temp&quot;&gt;17°&lt;/span&gt;
+## [17] &lt;span class=&quot;large-temp&quot;&gt;24°&lt;/span&gt;
+## [18] &lt;span class=&quot;large-temp&quot;&gt;22°&lt;/span&gt;
+## [19] &lt;span class=&quot;large-temp&quot;&gt;26°&lt;/span&gt;
+## [20] &lt;span class=&quot;large-temp&quot;&gt;27°&lt;/span&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;33°&quot; &quot;32°&quot; &quot;28°&quot; &quot;25°&quot; &quot;26°&quot; &quot;24°&quot; &quot;26°&quot; &quot;25°&quot; &quot;27°&quot; &quot;28°&quot; &quot;26°&quot;
+## [12] &quot;32°&quot; &quot;25°&quot; &quot;25°&quot; &quot;21°&quot; &quot;17°&quot; &quot;24°&quot; &quot;22°&quot; &quot;26°&quot; &quot;27°&quot; &quot;21°&quot; &quot;31°&quot;
+## [23] &quot;29°&quot; &quot;28°&quot; &quot;29°&quot; &quot;29°&quot; &quot;30°&quot; &quot;25°&quot; &quot;24°&quot; &quot;21°&quot; &quot;27°&quot; &quot;29°&quot; &quot;29°&quot;
+## [34] &quot;31°&quot; &quot;22°&quot; &quot;24°&quot; &quot;24°&quot; &quot;28°&quot; &quot;29°&quot; &quot;25°&quot; &quot;25°&quot; &quot;24°&quot;</code></pre>
+<pre class="r"><code>h.t.Tokyo&lt;- doc %&gt;% html_nodes(&quot;.actual .large-temp&quot;) %&gt;% html_text()
+
+doc &lt;- read_html(&quot;https://www.accuweather.com/en/jp/tokyo/226396/month/226396?monyr=6/01/2019&quot;)
+doc %&gt;% html_nodes(&quot;.small-temp&quot;)</code></pre>
+<pre><code>## {xml_nodeset (42)}
+##  [1] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+##  [2] &lt;span class=&quot;small-temp&quot;&gt;/20°&lt;/span&gt;
+##  [3] &lt;span class=&quot;small-temp&quot;&gt;/21°&lt;/span&gt;
+##  [4] &lt;span class=&quot;small-temp&quot;&gt;/18°&lt;/span&gt;
+##  [5] &lt;span class=&quot;small-temp&quot;&gt;/17°&lt;/span&gt;
+##  [6] &lt;span class=&quot;small-temp&quot;&gt;/20°&lt;/span&gt;
+##  [7] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+##  [8] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+##  [9] &lt;span class=&quot;small-temp&quot;&gt;/20°&lt;/span&gt;
+## [10] &lt;span class=&quot;small-temp&quot;&gt;/18°&lt;/span&gt;
+## [11] &lt;span class=&quot;small-temp&quot;&gt;/20°&lt;/span&gt;
+## [12] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+## [13] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+## [14] &lt;span class=&quot;small-temp&quot;&gt;/19°&lt;/span&gt;
+## [15] &lt;span class=&quot;small-temp&quot;&gt;/16°&lt;/span&gt;
+## [16] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+## [17] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+## [18] &lt;span class=&quot;small-temp&quot;&gt;/15°&lt;/span&gt;
+## [19] &lt;span class=&quot;small-temp&quot;&gt;/14°&lt;/span&gt;
+## [20] &lt;span class=&quot;small-temp&quot;&gt;/18°&lt;/span&gt;
+## ...</code></pre>
+<pre class="r"><code>doc %&gt;% html_nodes(&quot;.small-temp&quot;) %&gt;% html_text()</code></pre>
+<pre><code>##  [1] &quot;/19°&quot; &quot;/20°&quot; &quot;/21°&quot; &quot;/18°&quot; &quot;/17°&quot; &quot;/20°&quot; &quot;/19°&quot; &quot;/19°&quot; &quot;/20°&quot; &quot;/18°&quot;
+## [11] &quot;/20°&quot; &quot;/19°&quot; &quot;/19°&quot; &quot;/19°&quot; &quot;/16°&quot; &quot;/15°&quot; &quot;/15°&quot; &quot;/15°&quot; &quot;/14°&quot; &quot;/18°&quot;
+## [21] &quot;/16°&quot; &quot;/17°&quot; &quot;/17°&quot; &quot;/20°&quot; &quot;/19°&quot; &quot;/21°&quot; &quot;/22°&quot; &quot;/21°&quot; &quot;/20°&quot; &quot;/18°&quot;
+## [31] &quot;/17°&quot; &quot;/20°&quot; &quot;/23°&quot; &quot;/22°&quot; &quot;/19°&quot; &quot;/20°&quot; &quot;/21°&quot; &quot;/22°&quot; &quot;/22°&quot; &quot;/21°&quot;
+## [41] &quot;/19°&quot; &quot;/19°&quot;</code></pre>
+<pre class="r"><code>l.t.Tokyo&lt;- doc %&gt;% html_nodes(&quot;.small-temp&quot;) %&gt;% html_text()
+l.t.Tokyo&lt;- substr(l.t.Tokyo,2,4)
+
+j = cbind(date,h.t.Tokyo,l.t.Tokyo)
+
+
+merge(t, j, by = &quot;date&quot;)</code></pre>
+<pre><code>##     date h.t.Taipei l.t.Taipei h.t.Tokyo l.t.Tokyo
+## 1   5/26        33°        19°       33°       19°
+## 2   5/27        32°        20°       32°       20°
+## 3   5/28        28°        21°       28°       21°
+## 4   5/29        25°        18°       25°       18°
+## 5   5/30        26°        17°       26°       17°
+## 6   5/31        24°        20°       24°       20°
+## 7   6/01        26°        19°       26°       19°
+## 8   6/02        25°        19°       25°       19°
+## 9   6/03        27°        20°       27°       20°
+## 10  6/04        28°        18°       28°       18°
+## 11  6/05        26°        20°       26°       20°
+## 12  6/06        32°        19°       32°       19°
+## 13  6/07        25°        19°       25°       19°
+## 14  6/08        25°        19°       25°       19°
+## 15  6/09        21°        16°       21°       16°
+## 16  6/10        17°        15°       17°       15°
+## 17  6/11        24°        15°       24°       15°
+## 18  6/12        22°        15°       22°       15°
+## 19  6/13        26°        14°       26°       14°
+## 20  6/14        27°        18°       27°       18°
+## 21  6/15        21°        16°       21°       16°
+## 22  6/16        31°        17°       31°       17°
+## 23  6/17        29°        17°       29°       17°
+## 24  6/18        28°        20°       28°       20°
+## 25  6/19        29°        19°       29°       19°
+## 26  6/20        29°        21°       29°       21°
+## 27  6/21        30°        22°       30°       22°
+## 28  6/22        25°        21°       25°       21°
+## 29  6/23        24°        20°       24°       20°
+## 30  6/24        21°        18°       21°       18°
+## 31  6/25        27°        17°       27°       17°
+## 32  6/26        29°        20°       29°       20°
+## 33  6/27        29°        23°       29°       23°
+## 34  6/28        31°        22°       31°       22°
+## 35  6/29        22°        19°       22°       19°
+## 36  6/30        24°        20°       24°       20°
+## 37   7/1        24°        21°       24°       21°
+## 38   7/2        28°        22°       28°       22°
+## 39   7/3        29°        22°       29°       22°
+## 40   7/4        25°        21°       25°       21°
+## 41   7/5        25°        19°       25°       19°
+## 42   7/6        24°        19°       24°       19°</code></pre>
+<pre class="r"><code>e = merge(t, j, by = &quot;date&quot;)
+
+merge(d, c, by = &quot;date&quot;)</code></pre>
+<pre><code>##     date h.t.Berlin l.t.Berlin h.t.Ottawa l.t.Ottawa
+## 1   5/26        22°         9°        23°        10°
+## 2   5/27        22°        16°        17°         8°
+## 3   5/28        20°         9°        13°         8°
+## 4   5/29        18°         9°        19°         7°
+## 5   5/30        24°         7°        22°         8°
+## 6   5/31        25°        14°        15°         6°
+## 7   6/01        28°        15°        18°         9°
+## 8   6/02        32°        15°        21°         8°
+## 9   6/03        34°        19°        15°         5°
+## 10  6/04        31°        18°        19°         2°
+## 11  6/05        34°        17°        16°        10°
+## 12  6/06        32°        15°        23°         8°
+## 13  6/07        25°        14°        26°         7°
+## 14  6/08        23°        15°        26°         9°
+## 15  6/09        26°        12°        30°         9°
+## 16  6/10        27°        15°        29°        15°
+## 17  6/11        29°        18°        21°         9°
+## 18  6/12        33°        17°        24°         6°
+## 19  6/13        25°        16°        20°        12°
+## 20  6/14        30°        14°        19°        12°
+## 21  6/15        32°        18°        19°        10°
+## 22  6/16        23°        15°        21°         7°
+## 23  6/17        27°        16°        23°         7°
+## 24  6/18        29°        16°        26°        11°
+## 25  6/19        32°        17°        27°        17°
+## 26  6/20        26°        18°        19°        15°
+## 27  6/21        25°        17°        24°        14°
+## 28  6/22        26°        14°        26°        13°
+## 29  6/23        28°        14°        28°        12°
+## 30  6/24        30°        15°        28°        12°
+## 31  6/25        34°        19°        29°        14°
+## 32  6/26        38°        20°        28°        14°
+## 33  6/27        32°        15°        30°        15°
+## 34  6/28        24°        13°        28°        15°
+## 35  6/29        32°        14°        28°        16°
+## 36  6/30        39°        16°        24°        14°
+## 37   7/1        29°        17°        28°        12°
+## 38   7/2        22°        14°        30°        18°
+## 39   7/3        21°        11°        31°        16°
+## 40   7/4        23°        11°        32°        16°
+## 41   7/5        21°        16°        32°        20°
+## 42   7/6        24°        14°        30°        17°</code></pre>
+<pre class="r"><code>w = merge(d, c, by = &quot;date&quot;)
+
+merge(e, w, by = &quot;date&quot;)</code></pre>
+<pre><code>##     date h.t.Taipei l.t.Taipei h.t.Tokyo l.t.Tokyo h.t.Berlin l.t.Berlin
+## 1   5/26        33°        19°       33°       19°        22°         9°
+## 2   5/27        32°        20°       32°       20°        22°        16°
+## 3   5/28        28°        21°       28°       21°        20°         9°
+## 4   5/29        25°        18°       25°       18°        18°         9°
+## 5   5/30        26°        17°       26°       17°        24°         7°
+## 6   5/31        24°        20°       24°       20°        25°        14°
+## 7   6/01        26°        19°       26°       19°        28°        15°
+## 8   6/02        25°        19°       25°       19°        32°        15°
+## 9   6/03        27°        20°       27°       20°        34°        19°
+## 10  6/04        28°        18°       28°       18°        31°        18°
+## 11  6/05        26°        20°       26°       20°        34°        17°
+## 12  6/06        32°        19°       32°       19°        32°        15°
+## 13  6/07        25°        19°       25°       19°        25°        14°
+## 14  6/08        25°        19°       25°       19°        23°        15°
+## 15  6/09        21°        16°       21°       16°        26°        12°
+## 16  6/10        17°        15°       17°       15°        27°        15°
+## 17  6/11        24°        15°       24°       15°        29°        18°
+## 18  6/12        22°        15°       22°       15°        33°        17°
+## 19  6/13        26°        14°       26°       14°        25°        16°
+## 20  6/14        27°        18°       27°       18°        30°        14°
+## 21  6/15        21°        16°       21°       16°        32°        18°
+## 22  6/16        31°        17°       31°       17°        23°        15°
+## 23  6/17        29°        17°       29°       17°        27°        16°
+## 24  6/18        28°        20°       28°       20°        29°        16°
+## 25  6/19        29°        19°       29°       19°        32°        17°
+## 26  6/20        29°        21°       29°       21°        26°        18°
+## 27  6/21        30°        22°       30°       22°        25°        17°
+## 28  6/22        25°        21°       25°       21°        26°        14°
+## 29  6/23        24°        20°       24°       20°        28°        14°
+## 30  6/24        21°        18°       21°       18°        30°        15°
+## 31  6/25        27°        17°       27°       17°        34°        19°
+## 32  6/26        29°        20°       29°       20°        38°        20°
+## 33  6/27        29°        23°       29°       23°        32°        15°
+## 34  6/28        31°        22°       31°       22°        24°        13°
+## 35  6/29        22°        19°       22°       19°        32°        14°
+## 36  6/30        24°        20°       24°       20°        39°        16°
+## 37   7/1        24°        21°       24°       21°        29°        17°
+## 38   7/2        28°        22°       28°       22°        22°        14°
+## 39   7/3        29°        22°       29°       22°        21°        11°
+## 40   7/4        25°        21°       25°       21°        23°        11°
+## 41   7/5        25°        19°       25°       19°        21°        16°
+## 42   7/6        24°        19°       24°       19°        24°        14°
+##    h.t.Ottawa l.t.Ottawa
+## 1         23°        10°
+## 2         17°         8°
+## 3         13°         8°
+## 4         19°         7°
+## 5         22°         8°
+## 6         15°         6°
+## 7         18°         9°
+## 8         21°         8°
+## 9         15°         5°
+## 10        19°         2°
+## 11        16°        10°
+## 12        23°         8°
+## 13        26°         7°
+## 14        26°         9°
+## 15        30°         9°
+## 16        29°        15°
+## 17        21°         9°
+## 18        24°         6°
+## 19        20°        12°
+## 20        19°        12°
+## 21        19°        10°
+## 22        21°         7°
+## 23        23°         7°
+## 24        26°        11°
+## 25        27°        17°
+## 26        19°        15°
+## 27        24°        14°
+## 28        26°        13°
+## 29        28°        12°
+## 30        28°        12°
+## 31        29°        14°
+## 32        28°        14°
+## 33        30°        15°
+## 34        28°        15°
+## 35        28°        16°
+## 36        24°        14°
+## 37        28°        12°
+## 38        30°        18°
+## 39        31°        16°
+## 40        32°        16°
+## 41        32°        20°
+## 42        30°        17°</code></pre>
+<pre class="r"><code>A = merge(e, w, by = &quot;date&quot;)</code></pre>
 
 
 
