@@ -121,4 +121,3 @@ w = merge(d, c, by = "date")
 
 merge(e, w, by = "date")
 A = merge(e, w, by = "date")
-
