@@ -4,8 +4,16 @@ author: "Erin"
 date: "2019/7/14"
 output: html_document
 ---
+## Weather in 4 cities
+
+Berlin<https://www.accuweather.com/en/de/berlin/10178/month/178087?monyr=6/01/2019>
+Ottawa<https://www.accuweather.com/en/ca/ottawa/k1p/month/55487?monyr=6/01/2019>
+Taipei<https://www.accuweather.com/en/tw/taipei/226396/month/226396?monyr=6/01/2019>
+Tokyo<https://www.accuweather.com/en/jp/tokyo/226396/month/226396?monyr=6/01/2019>
+
 ```{r}
 library(rvest)
+
 doc <- read_html("https://www.accuweather.com/en/de/berlin/10178/month/178087?monyr=6/01/2019")
 doc %>% html_nodes(".actual .large-temp")
 doc %>% html_nodes(".actual .large-temp") %>% html_text()
