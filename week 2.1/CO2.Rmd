@@ -6,8 +6,12 @@ output: html_document
 ---
 
 ## heat wave in German
+資料:<https://www-genesis.destatis.de/genesis/online/data;sid=40CA8B8620A58C5225517D1DE606D409.GO_1_2?operation=abruftabelleAbrufen&selectionname=85111-0001&levelindex=0&levelid=1563393992782&index=1>
 
-德國是非常注重環保議題的國家，近年來因氣候變遷等因素，造成熱浪來襲。藉由德國空氣汙染的統計數據，比較歷年來哪個因素造成最多CO2，用視覺化圖表呈現。
+德國是非常注重環保議題的國家，近年來因氣候變遷等因素，造成熱浪來襲。
+想藉由德國空氣汙染的統計數據，以10年為間隔，比較哪個因素造成最多CO2?因素是否改變?
+
+ps:三個圖表的年份由上到下為1996.2006.2016
 
 ```{r}
 library(readxl)
@@ -15,18 +19,16 @@ library(dplyr)
 library(ggplot2)
 CO2 <-read_excel("C:\\Users\\Erin\\OneDrive\\文件\\GitHub\\hw\\week 2.1\\CO2.xlsx")
 L <-filter(CO2, grepl(pattern ="CO2", x = CO2$Luftemissionsart , fixed =TRUE))
-o <-select(.data = L,CPA,"1996")
-c <-ggplot(data = CO2)  +geom_point(aes(x = 1995,y = CPA))
-theme_set(theme_bw())
-#ggplot(data.frame(L), aes(x = 1995, y = CPA)) + geom_point() 
-qplot(x=1995,                               
-      y=CPA,                              
-      data=L,                      
-      geom="point",                         
-      main = "CO2 in 1995",  
-      xlab="1995",                          
-      ylab="CPA",                    
-      )
+o <-select(.data = L,CPA,os,zs,ns)
+
+ggplot(data.frame(o), aes(x =ns, y =CPA)) +
+   geom_point() 
+
+ggplot(data.frame(o), aes(x =os , y =CPA)) +
+   geom_point() 
+
+ggplot(data.frame(o), aes(x =zs , y =CPA)) +
+   geom_point() 
 
 ```
 
