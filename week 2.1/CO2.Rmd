@@ -1,0 +1,32 @@
+---
+title: "CO2"
+author: "Erin"
+date: "2019/7/16"
+output: html_document
+---
+
+## heat wave in German
+
+德國是非常注重環保議題的國家，近年來因氣候變遷等因素，造成熱浪來襲。藉由德國空氣汙染的統計數據，比較歷年來哪個因素造成最多CO2，用視覺化圖表呈現。
+
+```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+CO2 <-read_excel("C:\\Users\\Erin\\OneDrive\\文件\\GitHub\\hw\\week 2.1\\CO2.xlsx")
+L <-filter(CO2, grepl(pattern ="CO2", x = CO2$Luftemissionsart , fixed =TRUE))
+o <-select(.data = L,CPA,"1996")
+c <-ggplot(data = CO2)  +geom_point(aes(x = 1995,y = CPA))
+theme_set(theme_bw())
+#ggplot(data.frame(L), aes(x = 1995, y = CPA)) + geom_point() 
+qplot(x=1995,                               
+      y=CPA,                              
+      data=L,                      
+      geom="point",                         
+      main = "CO2 in 1995",  
+      xlab="1995",                          
+      ylab="CPA",                    
+      )
+
+```
+

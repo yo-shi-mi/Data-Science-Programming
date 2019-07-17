@@ -2,7 +2,7 @@ doc <- read_html("https://www.accuweather.com/en/de/berlin/10178/month/178087?mo
 doc %>% html_nodes(".actual .large-temp")
 doc %>% html_nodes(".actual .large-temp") %>% html_text()
 h.t.Berlin<- doc %>% html_nodes(".actual .large-temp") %>% html_text()
-
+Hb<- h.t.Berlin<- substr(h.t.Berlin,1,2)
 
 doc <- read_html("https://www.accuweather.com/en/de/berlin/10178/month/178087?monyr=6/01/2019")
 doc %>% html_nodes(".small-temp")
@@ -27,6 +27,7 @@ date[14]<- " 6/08"
 date[15]<- " 6/09"
 
 d = cbind(date,h.t.Berlin,l.t.Berlin)
+D = cbind(date,Hb)
 
 doc <- read_html("https://www.accuweather.com/en/ca/ottawa/k1p/month/55487?monyr=6/01/2019")
 doc %>% html_nodes(".date")
@@ -121,3 +122,7 @@ w = merge(d, c, by = "date")
 
 merge(e, w, by = "date")
 A = merge(e, w, by = "date")
+
+ggplot(data.frame(d), aes(x = date, y = h.t.Berlin)) + 
+  geom_point() 
+
