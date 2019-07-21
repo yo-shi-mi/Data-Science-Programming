@@ -23,3 +23,6 @@ Introduction:Guten Tag!
 
 ## Week two-1
 * [HW2](https://yo-shi-mi.github.io/hw/week%202.1/CO2.html)
+
+## Week two-2
+* [HW3](https://yo-shi-mi.github.io/hw/week%202.2/lyrics.html)
