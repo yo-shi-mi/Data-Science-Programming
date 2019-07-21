@@ -9,6 +9,8 @@ output: html_document
 
 找了一首韓文歌的中文翻譯，分析歌詞裡甚麼用字/詞最多
 
+(扣掉只有出現一次的詞))
+
 사계-태연<http://egg1511.pixnet.net/blog/post/403840871-taeyeon_four_seasons>
 
 ```{r}
