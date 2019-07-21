@@ -1,0 +1,6 @@
+library("tm")
+library("tmcn")
+library("rJava")
+library("Rwordseg")
+library("SnowballC")
+library("slam")
