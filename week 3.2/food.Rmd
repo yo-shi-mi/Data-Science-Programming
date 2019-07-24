@@ -1,0 +1,193 @@
+---
+title: "food"
+author: "Erin"
+date: "2019/7/24"
+output: html_document
+---
+package
+```{r}
+library(tidyverse)
+library(xml2)
+library(rvest)
+library(stringr)
+library(jiebaRD)
+library(jiebaR)
+library(tmcn)
+library(lubridate)
+```
+
+## 胖老爹排隊潮
+```{r}
+fatdaddy<- data.frame()
+for (id in 3:1) {
+  prefix<-"https://www.ptt.cc/bbs/Gossiping/search?page="
+  url<-paste0(prefix,as.character(id),"&q=%E8%83%96%E8%80%81%E7%88%B9")
+  session<-html_session(url = url)
+  form<-session %>% html_node("form") %>% html_form()
+  
+  gossiping<-submit_form(
+    session = session,
+    form = form,
+    submit = "yes"
+  )
+  
+  ptt<-read_html(gossiping)
+  title<-ptt%>%html_nodes(".title a")%>%html_text()
+  date<-ptt%>%html_nodes(".date")%>%html_text()
+
+  fatdaddy<- rbind(fatdaddy,data.frame(title,date))
+ }
+
+cutter<-worker("tag")
+dic = c("胖老爹")
+new_user_word(cutter,dic)
+a = sapply(dic,grepl,fatdaddy$title)
+b = apply(a,1,any)
+
+data<- fatdaddy[b,]%>%
+  mutate(date=as.character(date))%>%
+  mutate(month=month(as.POSIXlt(date,format = "%m/%d")))%>%
+  count(month)
+
+p<-data
+colnames(p)<-c("month","posts")
+p$month<-c("2019.01","2019.02","2019.03","2019.04","2019.05","2019.06","2018.08","2018.09","2018.10","2018.11","2018.12")
+
+ggplot(p,aes(x=month,y=posts))+
+  geom_bar(stat = "identity")+
+  ggtitle("胖老爹排隊潮")
+```
+
+## 蜂蜜檸檬熱潮
+```{r}
+honey<-data.frame()
+
+for (id in 3:1) {
+  prefix<-"https://www.ptt.cc/bbs/Gossiping/search?page="
+  url<-paste0(prefix,as.character(id),"&q=%E8%9C%82%E8%9C%9C%E6%AA%B8%E6%AA%AC")
+  session<-html_session(url = url)
+  form<-session %>% html_node("form") %>% html_form()
+  form
+  
+  gossiping<-submit_form(
+    session = session,
+    form = form,
+    submit = "yes"
+  )
+  
+  ptt<-read_html(gossiping)
+  title<-ptt%>%html_nodes(".title a")%>%html_text()
+  date<-ptt%>%html_nodes(".date")%>%html_text()
+  
+  honey<- rbind(honey,data.frame(title,date))
+}
+
+cutter<-worker("tag")
+dic = c("蜂蜜檸檬")
+new_user_word(cutter,dic)
+a = sapply(dic,grepl,honey$title)
+b = apply(a,1,any)
+
+data<- honey[b,]%>%
+  mutate(date=as.character(date))%>%
+  mutate(month=month(as.POSIXlt(date,format = "%m/%d")))%>%
+  count(month)
+
+p<-data
+colnames(p)<-c("month","posts")
+p$month<-c("2019.01","2019.02","2019.03","2019.04","2019.06","2018.11","2018.12")
+
+ggplot(p,aes(x=month,y=posts))+
+  geom_bar(stat = "identity")+
+  ggtitle("蜂蜜檸檬爆紅")
+```
+
+## 髒髒包正夯
+```{r}
+choco<-data.frame()
+
+for (id in 3:1) {
+  prefix<-"https://www.ptt.cc/bbs/Gossiping/search?page="
+  url<-paste0(prefix,as.character(id),"&q=%E9%AB%92%E9%AB%92%E5%8C%85")
+  session<-html_session(url = url)
+  form<-session %>% html_node("form") %>% html_form()
+  form
+  
+  gossiping<-submit_form(
+    session = session,
+    form = form,
+    submit = "yes"
+  )
+  
+  ptt<-read_html(gossiping)
+  title<-ptt%>%html_nodes(".title a")%>%html_text()
+  date<-ptt%>%html_nodes(".date")%>%html_text()
+  
+  choco<- rbind(choco,data.frame(title,date))
+}
+
+cutter<-worker("tag")
+dic = c("髒髒包")
+new_user_word(cutter,dic)
+a = sapply(dic,grepl,choco$title)
+b = apply(a,1,any)
+
+data<- choco[b,]%>%
+  mutate(date=as.character(date))%>%
+  mutate(month=month(as.POSIXlt(date,format = "%m/%d")))%>%
+  count(month)
+
+p<-data
+colnames(p)<-c("month","posts")
+p$month<-c("2019.01","2019.02","2019.05","2019.07","2018.12")
+
+ggplot(p,aes(x=month,y=posts))+
+  geom_bar(stat = "identity")+
+  ggtitle("髒髒包正夯")
+```
+
+## 一蘭拉麵開幕排隊超過一小時!?
+```{r}
+iran<-data.frame()
+
+for (id in 4:1) {
+  prefix<-"https://www.ptt.cc/bbs/Gossiping/search?page="
+  url<-paste0(prefix,as.character(id),"&q=%E4%B8%80%E8%98%AD")
+  session<-html_session(url = url)
+  form<-session %>% html_node("form") %>% html_form()
+  form
+  
+  gossiping<-submit_form(
+    session = session,
+    form = form,
+    submit = "yes"
+  )
+  
+  ptt<-read_html(gossiping)
+  title<-ptt%>%html_nodes(".title a")%>%html_text()
+  date<-ptt%>%html_nodes(".date")%>%html_text()
+  
+  iran<- rbind(iran,data.frame(title,date))
+  ichiran<-iran[-12,] 
+}
+
+cutter<-worker("tag")
+dic = c("一蘭")
+new_user_word(cutter,dic)
+a = sapply(dic,grepl,ichiran$title)
+b = apply(a,1,any)
+
+data<- ichiran[b,]%>%
+  mutate(date=as.character(date))%>%
+  mutate(month=month(as.POSIXlt(date,format = "%m/%d")))%>%
+  count(month)
+
+p<-data
+colnames(p)<-c("month","posts")
+p$month<-c("2019.01","2019.02","2019.03","2019.04","2019.05","2019.06","2019.07","2018.08","2018.09","2018.10","2018.11","2018.12")
+
+ggplot(p,aes(x=month,y=posts))+
+  geom_bar(stat = "identity")+
+  ggtitle("一蘭拉麵剛開幕排隊超過一小時!?")
+```
+

@@ -1,3 +1,8 @@
 library(RSelenium)
+#library(httr)
 rs.test<- remoteDriver(remoteServerAddr = "localhost",port=4444,browserName = "chrome")
 rs.test$open()
+rs.test$navigate("https://www.ptt.cc/bbs/Gossiping/search?page=1&q=%E8%83%96%E8%80%81%E7%88%B9")
+#z = GET("https://www.ptt.cc/bbs/Gossiping/search?page=1&q=%E8%83%96%E8%80%81%E7%88%B9",set_cookies(`over18` = 1))
+w<- rs.test$findElements(using = 'css selector', value = ".title a")
+x<- unlist(lapply(, function(e) { e$getElementText() }))
