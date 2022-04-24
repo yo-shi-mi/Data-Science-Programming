@@ -22,10 +22,10 @@ Introduction:Guten Tag!
 * [Data merge(just for testing)](https://github.com/yo-shi-mi/hw/blob/master/week%201.2/Practice%201.R)
 
 ## Week two-1
-* [HW2](https://yo-shi-mi.github.io/hw/week%202.1/CO2.html)
+* [HW2(ggplot)](https://yo-shi-mi.github.io/hw/week%202.1/CO2.html)
 
 ## Week two-2
-* [HW3](https://yo-shi-mi.github.io/hw/week%202.2/lyrics.html)
+* [HW3(wordcloud)](https://yo-shi-mi.github.io/hw/week%202.2/lyrics.html)
 
 ## Final
-* [FOOD](https://yo-shi-mi.github.io/hw/week%203.2/food.html)
+* [How long does the trend on PTT last ?](https://yo-shi-mi.github.io/hw/week%203.2/food.html)
