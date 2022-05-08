@@ -15,17 +15,16 @@ Introduction:Guten Tag!
 * README.md
 * Install Git
 * Install R.Rstudio
-* [Build Rmarkdown](https://github.com/yo-shi-mi/hw/blob/master/week%201.1/my_first_r_markdown.html)
+* [Build Rmarkdown]  
 
 ## Week 1-2
-* [HW1(with web crawler)](https://yo-shi-mi.github.io/hw/week%201.2/weather.html)
-* [Data merge(just for testing)](https://github.com/yo-shi-mi/hw/blob/master/week%201.2/Practice%201.R)
+* [HW1(with web crawler)]  
+* [Data merge(just for testing)]  
 
 ## Week 2-1
-* [HW2(ggplot)](https://yo-shi-mi.github.io/hw/week%202.1/CO2.html)
-
+* [HW2(ggplot)]  
 ## Week 2-2
-* [HW3(wordcloud)](https://yo-shi-mi.github.io/hw/week%202.2/lyrics.html)
+* [HW3(wordcloud)]  
 
 ## Final
-* [How long does the trend on PTT last ?](https://yo-shi-mi.github.io/hw/week%203.2/food.html)
+* [How long does the trend on PTT last ?]  
